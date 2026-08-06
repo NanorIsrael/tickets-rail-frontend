@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-DGeXAQPT.js";var t=e();function n(){return(0,t.jsx)(`div`,{children:`Hello "/LandingPage"!`})}export{n as component};
