@@ -69,7 +69,7 @@ const TicketCard = ({ ticket, onBuy }: { ticket: Ticket, onBuy: (ticket: Ticket)
           </span>
         </div>
         <div>
-          <img src="favicon.ico" className='w-full my-4 object-cover' />
+          <img src={ticket.cover_image} className='w-full my-4 object-cover' />
         </div>
         <div className="mt-4 space-y-2 text-sm text-gray-600">
           <div className="flex items-center gap-2">

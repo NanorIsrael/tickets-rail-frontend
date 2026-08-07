@@ -12,6 +12,7 @@ export type Ticket = {
     title: string,
     starts_at: string,
     venue_name: string,
+    cover_image: string,
     amount: number,
     category: { id: string, slug: string, name: string },
     ticket_types: TicketTypes[]
