@@ -5,6 +5,7 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  Link,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
@@ -119,20 +120,21 @@ function TopBar() {
   const now = new Date();
   const stamp = now.toISOString().replace("T", " ").slice(0, 19) + " UTC";
   return (
-    <header className="flex h-12 items-center justify-between border-b border-border/60 bg-panel/80 px-3 backdrop-blur">
-      <div className="flex items-center gap-3">
-        <SidebarTrigger />
-        <div className="hud-label hidden sm:block">Sentinel PDX / Live</div>
+    <header className="flex h-12 items-center justify-between border-b border-border/60 bg-panel/80 px-3 ">
+      <div className="flex items-center gap-3 text-lg">
+        <div className="hud-label hidden sm:block mx-3 font-bold">
+          <Link to="/" className="font-bold text-lg">
+            Event Hub
+          </Link>
+        </div>
       </div>
       <div className="flex items-center gap-4">
-        <div className="hidden md:flex items-center gap-2 font-mono text-xs text-muted-foreground">
-          <span
-            className="status-dot pulse-crit"
-            style={{ color: "var(--color-status-ok)", backgroundColor: "var(--color-status-ok)" }}
-          />
-          TELEMETRY ONLINE
+        <div className="hiden md:flex items-center gap-2 font-mono text-xs text-muted-foreground">
+          <Link to="/orders" className="text-md">
+            Orders
+          </Link>
         </div>
-        <div className="font-mono text-xs text-muted-foreground">{stamp}</div>
+        {/* <div className="font-mono text-xs text-muted-foreground">{stamp}</div> */}
       </div>
     </header>
   );
@@ -145,7 +147,7 @@ function AuthedApp() {
       <div className="min-h-screen flex w-full">
         {/* <AppSidebar /> */}
         <div className="flex-1 flex flex-col min-w-0">
-          {/* <TopBar /> */}
+          <TopBar />
           <main className="flex-1 p-4 md:p-6 overflow-x-hidden">
             <Outlet />
           </main>

@@ -56,6 +56,13 @@ const createCheckout = async (order: any) => {
     return (response.json())
 }
 
+const categoryColors: { [k: string]: string } = {
+    0: 'bg-pink-100 text-pink-700',
+    1: 'bg-orange-100 text-pink-700',
+    2: 'bg-blue-100 text-blue-700',
+    3: 'bg-amber-100 text-amber-700',
+    4: 'bg-emerald-100 text-emerald-700',
+};
 const TicketDetailPage = () => {
     const [selectedTypeId, setSelectedTypeId] = useState<number | null>(null);
     const [quantity, setQuantity] = useState(1);
@@ -98,7 +105,6 @@ const TicketDetailPage = () => {
 
     const maxQty = Math.min(selectedType?.available ?? 1, selectedType ? selectedType.available : 10);
     const total = (selectedType?.price ?? 0) * quantity;
-    const isValidForm = form.email && form.phone && form.name
 
     const handleTypeChange = (typeId: number) => {
         setSelectedTypeId(typeId);
@@ -135,6 +141,7 @@ const TicketDetailPage = () => {
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
+    const isValidForm = form.email && form.name && form.phone && quantity > 0 && selectedType
 
     const onBack = () => { navigate({ to: "/" }) }
     const onCheckout = (order: any) => mutate(order)
@@ -208,9 +215,10 @@ const TicketDetailPage = () => {
                         <div>
                             <h2 className="text-sm font-semibold text-gray-900">Select ticket type</h2>
                             <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
-                                {ticket?.ticket_types?.map((type: TicketTypes) => {
+                                {ticket?.ticket_types?.map((type: TicketTypes, idx) => {
                                     const soldOut = type.available === 0;
                                     const active = selectedTypeId === type.id;
+                                    { console.log(type) }
                                     return (
                                         <button
                                             type="button"
@@ -224,7 +232,19 @@ const TicketDetailPage = () => {
                                                     : 'border-gray-200 hover:border-gray-300'
                                                 }`}
                                         >
-                                            <p className="text-sm font-semibold text-gray-900">{type.label}</p>
+                                            {/* <div className="flex items-start justify-between gap-3">
+                                                <h3 className="text-lg font-semibold text-gray-900">{ticket.title}</h3>
+                                                <span
+                                                    className={`shrink-0 rounded-full px-3 py-1 text-xs font-medium ${categoryColors[idx] || 'bg-gray-100 text-gray-700'
+                                                        }`}
+                                                >
+                                                    c
+                                                </span>
+                                            </div> */}
+                                            <p
+                                                className={`shrink-0 rounded-full px-3 py-1 text-xs font-medium ${categoryColors[idx] || 'bg-gray-100 text-gray-700'}`}>
+                                                {type.name}
+                                            </p>
                                             <p className="mt-1 text-lg font-bold text-gray-900">
                                                 GHS {type.price_display.toLocaleString()}
                                             </p>

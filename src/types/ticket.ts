@@ -4,6 +4,7 @@ export type TicketTypes = {
     price_display: string,
     price: number,
     available: number
+    name: string
 }
 
 export type Ticket = {
